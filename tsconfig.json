@@ -9,7 +9,13 @@
     "baseUrl": "src",
     "paths": {
       "@/styles/*": ["styles/*"], 
-      "@/shared/*": ["shared/*"]
+      "@/shared/*": ["shared/*"],
+      "@/graphql/*": ["graphql/*"],
+      "@/utils/*": ["shared/utils/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/constants/*": ["shared/constants/*"],
+      "@/containers/*": ["containers/*"],
+      "@/routes/*": ["routes/*"],
     },
 
     /* Bundler mode */

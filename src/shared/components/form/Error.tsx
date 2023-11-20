@@ -4,16 +4,16 @@ import { right } from '@/styles/directions';
 
 type ErrorProps = {
   error: string;
-  top?: boolean;
+  $top?: boolean;
 };
 
-const Error = ({ error, top }:ErrorProps) => (<ErrorText top={top}>{error}</ErrorText>);
+const Error = ({ error, $top }:ErrorProps) => (<ErrorText $top={$top}>{error}</ErrorText>);
 
 export default Error;
 
 // region STYLES
 
-const ErrorText = styled.span<{ top?: boolean }>`
+const ErrorText = styled.span<{ $top?: boolean }>`
   font-size: 10px;
   line-height: 13px;
   color: ${colorDarkRed};
@@ -21,7 +21,7 @@ const ErrorText = styled.span<{ top?: boolean }>`
   display: block;
   margin-top: 10px;
   
-  ${props => props.top && `
+  ${props => props.$top && `
     position: absolute;
     margin: 0;
     ${right(props)}: 0;

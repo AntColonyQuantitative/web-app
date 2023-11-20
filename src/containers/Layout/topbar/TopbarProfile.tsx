@@ -12,19 +12,27 @@ import TopbarMenuLink, { TopbarLink } from './TopbarMenuLink';
 import { TopbarBack, TopbarDownIcon } from './BasicTopbarComponents';
 
 import Ava from '@/shared/img/ava.png';
+import { useUserContext } from '@/hooks/userHooks';
+import { AUTH_TOKEN } from '@/shared/constants/storage';
 
 const TopbarProfile = () => {
+  const { store } = useUserContext();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
 
+  const logout = () => {
+      sessionStorage.setItem(AUTH_TOKEN, '');
+      localStorage.setItem(AUTH_TOKEN, '');   
+  }
+
   return (
     <TopbarProfileWrap>
       <TopbarAvatarButton type="button" onClick={toggleCollapse}>
         <TopbarAvatarImage src={Ava} alt="avatar" />
-        <TopbarAvatarName>Holly Hammond</TopbarAvatarName>
+        <TopbarAvatarName>{store?store.displayName:"UnAuthorized"}</TopbarAvatarName>
         <TopbarDownIcon />
       </TopbarAvatarButton>
       {isCollapsed && (
@@ -46,21 +54,21 @@ const TopbarProfile = () => {
             <TopbarMenuLink
               title="Wallet"
               icon="briefcase"
-              path="/pages/dashboard"
+              path="/dashboard"
               onClick={toggleCollapse}
             />
             <TopbarMenuDivider />
             <TopbarMenuLink
               title="Settings"
               icon="cog"
-              path="/pages/exchange"
+              path="/exchange"
               onClick={toggleCollapse}
             />
             <TopbarMenuLink
               title="Log Out"
               icon="exit"
-              path="/"
-              onClick={toggleCollapse}
+              path="/login"
+              onClick={logout}
             />
           </TopbarMenu>
         </TopbarMenuWrap>

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 type FormFieldProps = {
   input?: any; 
   meta?: any;
-  component: any;
+  component?: any;
   isAboveError?: boolean;
   wrapperClassName?: string;
   [key: string]: any;
@@ -21,7 +21,7 @@ const FormField: React.FC<FormFieldProps> = ({
 }) => (
   <FormInputWrap className={wrapperClassName}>
     <Component {...props} {...input} />
-    {touched && error && <Error error={error} top={isAboveError} />}
+    {touched && error && <Error error={error} $top={isAboveError} />}
   </FormInputWrap>
 );
 
