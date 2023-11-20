@@ -12,6 +12,15 @@ export const GET_USERS = gql`
   }
 `;
 
+export const GET_USER = gql`
+  query getUserInfo {
+    getUserInfo {
+      id
+      displayName
+    }
+  }
+`;
+
 export const FIND_USER = gql`
   query getUserById($id: String!) {
     getUserById(id: $id) {

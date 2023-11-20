@@ -5,30 +5,21 @@ import { paddingLeft } from '@/styles/directions';
 import Layout from '@/containers/Layout';
 import MainWrapper from '@/containers/App/MainWrapper';
 import LogIn from '@/containers/Login';
-import Dashboard from '@/containers/Dashboard';
-import ExchangeManagement from '@/containers/ExchangeManagement';
-import Profile from '@/containers/Account/Profile';
 import Page404 from '@/containers/404';
+import { routes } from './routeConfig';
 
-const Pages = () => (
-  <Switch>
-    <Route path="/pages/dashboard" component={Dashboard} />
-    <Route path="/pages/exchange" component={ExchangeManagement} />
-  </Switch>
-);
-
-const Account = () => (
-  <Switch>
-    <Route path="/account/profile" component={Profile} />
-  </Switch>
-);
 
 const wrappedRoutes = () => (
   <div>
     <Layout />
     <ContainerWrap>
-      <Route path="/pages" component={Pages} />
-      <Route path="/account" component={Account} />
+      {routes.map((item) => (
+                <Route
+                  path={item.path}
+                  key={item.name}
+                  component={item.component}
+                />
+              ))}
     </ContainerWrap>
   </div>
 );
@@ -37,7 +28,6 @@ const Router = () => (
   <MainWrapper>
     <main>
       <Switch>
-        <Route exact path="/" component={LogIn} />
         <Route exact path="/login" component={LogIn} />
         <Route path="/404" component={Page404} />
         <Route path="/" component={wrappedRoutes} />

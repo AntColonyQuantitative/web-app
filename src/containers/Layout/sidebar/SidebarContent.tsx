@@ -1,25 +1,48 @@
 import { colorBorder, colorBackground, colorHover } from '@/styles/palette';
 import { left } from '@/styles/directions';
 import styled from 'styled-components';
-import SidebarLink, { SidebarLinkTitle } from './SidebarLink';
+import SidebarLink, { SidebarLinkTitle, SidebarNavLink } from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
+import { THEME } from '@/shared/constants/storage';
+import { useUserContext } from '@/hooks/userHooks';
 
 type SidebarContentProps = {
   onClick: () => void;
   $collapse?: boolean;
 };
 
-const SidebarContent = ({ onClick, $collapse }: SidebarContentProps) => (
+const SidebarContent = ({ onClick, $collapse }: SidebarContentProps) => {
+  const { store, setStore } = useUserContext();
+
+  const changeTheme = (color: string) =>{
+    setStore({
+      ...store,
+      themeColor: color
+    });
+    localStorage.setItem(THEME, color);
+  }
+
+  return (
   <SidebarContentWrap $collapse={$collapse}>
     <SidebarBlock $collapse={$collapse}>
       <SidebarLink
         title="Dashboard"
         icon="home"
-        route="/pages/dashboard"
+        route="/dashboard"
         onClick={onClick}
       />
     </SidebarBlock>
     <SidebarBlock $collapse={$collapse}>
+    <SidebarCategory title="Theme" icon="diamond" $collapse={$collapse}>
+      {/* @ts-ignore - Ignoring because of complex union types that are not correctly inferred */}
+        <SidebarNavLink as="button" type="button" onClick={()=>changeTheme("light")}>
+          <SidebarLinkTitle>Light Theme</SidebarLinkTitle>
+        </SidebarNavLink>
+      {/* @ts-ignore - Ignoring because of complex union types that are not correctly inferred */}
+        <SidebarNavLink as="button" type="button" onClick={()=>changeTheme("dark")}>
+          <SidebarLinkTitle>Dark Theme</SidebarLinkTitle>
+        </SidebarNavLink>
+      </SidebarCategory>
       <SidebarCategory title="Account" icon="user" $collapse={$collapse}>
         <SidebarLink
           title="Profile"
@@ -28,13 +51,13 @@ const SidebarContent = ({ onClick, $collapse }: SidebarContentProps) => (
         />
         <SidebarLink
           title="Exchange Management"
-          route="/pages/exchange"
+          route="/exchange"
           onClick={onClick}
         />
       </SidebarCategory>
     </SidebarBlock>
   </SidebarContentWrap>
-);
+)};
 
 export default SidebarContent;
 

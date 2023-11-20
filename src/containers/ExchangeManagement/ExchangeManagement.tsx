@@ -1,7 +1,12 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import ContentCard from './components/ContentCard';
+import { useTitle } from '@/hooks/useTitle';
+import { ROUTE_KEY, getRouteByKey } from '@/routes/routeConfig';
 
-const ExchangeManagement = () => (
+const ExchangeManagement = () => {
+  useTitle(getRouteByKey(ROUTE_KEY.EXCHANGE_MANAGEMENT).title); 
+
+  return(
   <Container>
     <Row>
       <Col md={12}>
@@ -13,5 +18,5 @@ const ExchangeManagement = () => (
     </Row>
   </Container>
 );
-
+}
 export default ExchangeManagement;

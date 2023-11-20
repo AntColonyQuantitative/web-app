@@ -19,7 +19,7 @@ const Topbar = ({ changeMobileSidebarVisibility, changeSidebarVisibility }:Topba
         onClickMobile={changeMobileSidebarVisibility}
         onClickDesktop={changeSidebarVisibility}
       />
-      <TopbarLogo to="/pages/dashboard" />
+      <TopbarLogo to="/dashboard" />
     </TopbarLeft>
     <TopbarRight>
       <TopbarProfile />
