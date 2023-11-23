@@ -1,7 +1,8 @@
 import Dashboard from '@/containers/Dashboard';
 import ExchangeManagement from '@/containers/ExchangeManagement';
 import Profile from '@/containers/Account/Profile';
-// import Page404 from '@/containers/404';
+import Page404 from '@/containers/404';
+import Login from '@/containers/Login';
 
 interface IRoute {
   path: string;
@@ -15,7 +16,25 @@ export const ROUTE_KEY = {
   DASHBOARD: 'dashboard',
   EXCHANGE_MANAGEMENT: 'exchange_management',
   ACCOUNT_PROFILE: 'account_profile',
-  // PAGE_404: 'p404',
+  PAGE_404: 'page_404',
+  LOGIN: 'login',
+  EMPTY: 'empty'
+};
+
+export const PUBLIC_ROUTE_CONFIG: Record<string, IRoute> = {
+  [ROUTE_KEY.LOGIN]: {
+    path: '/login',
+    name: 'login',
+    title: 'Login - AntColony',
+    component: Login,
+  },
+  [ROUTE_KEY.PAGE_404]:
+  {
+    path: '/404',
+    name: '404',
+    title: '404 - AntColony',
+    component: Page404
+  }
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
@@ -42,15 +61,11 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
     name: 'profile',
     title: 'Profile - AntColony',
     component: Profile,
-  },
-  // [ROUTE_KEY.PAGE_404]:
-  // {
-  //   path: '*',
-  //   name: '404 - AntColony',
-  //   component: Page404
-  // },
+  }
 };
 
 export const routes = Object.values(ROUTE_CONFIG);
+export const publicRoutes = Object.values(PUBLIC_ROUTE_CONFIG);
 
 export const getRouteByKey = (key: string) => ROUTE_CONFIG[key];
+export const getPublicRouteByKey = (key: string) => PUBLIC_ROUTE_CONFIG[key];

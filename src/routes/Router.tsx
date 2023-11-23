@@ -4,32 +4,40 @@ import { colorBackgroundBody } from '@/styles/palette';
 import { paddingLeft } from '@/styles/directions';
 import Layout from '@/containers/Layout';
 import MainWrapper from '@/containers/App/MainWrapper';
-import LogIn from '@/containers/Login';
-import Page404 from '@/containers/404';
-import { routes } from './routeConfig';
+import { ROUTE_KEY, publicRoutes, routes } from './routeConfig';
+import { isAuthenticated } from '@/shared/utils/auth';
+import { useGoTo } from '@/hooks/useGoTo';
 
-
-const wrappedRoutes = () => (
-  <div>
-    <Layout />
-    <ContainerWrap>
-      {routes.map((item) => (
-                <Route
-                  path={item.path}
-                  key={item.name}
-                  component={item.component}
-                />
-              ))}
-    </ContainerWrap>
-  </div>
-);
+const wrappedRoutes = () => {
+  const { go } = useGoTo();
+  if (!isAuthenticated()) {
+    go(ROUTE_KEY.LOGIN);
+  }
+  return (
+    <div>
+      <Layout />
+      <ContainerWrap>
+        <Switch>
+          {routes.map((item) => (
+            <Route
+              key={item.name}
+              path={item.path}
+              component={item.component}
+            />
+          ))}
+        </Switch>
+      </ContainerWrap>
+    </div>
+  );
+};
 
 const Router = () => (
   <MainWrapper>
     <main>
       <Switch>
-        <Route exact path="/login" component={LogIn} />
-        <Route path="/404" component={Page404} />
+        {publicRoutes.map((item) => (
+          <Route key={item.name} path={item.path} component={item.component} />
+        ))}
         <Route path="/" component={wrappedRoutes} />
       </Switch>
     </main>
