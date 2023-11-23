@@ -26,7 +26,7 @@ const isAuthenticated = (): boolean => {
   } else {
     token = sessionStorage.getItem(AUTH_TOKEN);
   }
-  if (token === null) return false;
+  if (!token) return false;
   if (isJWTExpired(token)) return false;
   return true;
 };

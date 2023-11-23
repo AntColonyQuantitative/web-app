@@ -1,4 +1,4 @@
-import { getRouteByKey } from '@/routes/routeConfig';
+import { getRouteByKey, getPublicRouteByKey } from '@/routes/routeConfig';
 import { useHistory } from 'react-router-dom';
 
 /**
@@ -15,7 +15,7 @@ export const useGoTo = () => {
       history.push(`/`);
       return;
     }
-    const route = getRouteByKey(pageKey);
+    const route = getRouteByKey(pageKey) || getPublicRouteByKey(pageKey);
     if (route && route.path) {
       if (!params) {
         history.push(`${route.path}`);

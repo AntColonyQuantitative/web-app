@@ -89,7 +89,7 @@ const LogInForm = ({ onSubmit, error = '' }: LogInFormProps) => {
             defaultValue=""
           />
           <AccountForgotPassword>
-            <NavLink to="/">Forgot a password?</NavLink>
+            <NavLink to="/login">Forgot a password?</NavLink>
           </AccountForgotPassword>
         </FormGroupField>
       </FormGroup>

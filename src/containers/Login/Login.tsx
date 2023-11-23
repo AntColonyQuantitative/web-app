@@ -23,7 +23,7 @@ import { AUTH_TOKEN, EMAIL } from '@/shared/constants/storage';
 import { useSearchParams } from '@/hooks/useSearchParams';
 import { useTitle } from '@/hooks/useTitle';
 import { useUserContext } from '@/hooks/userHooks';
-import { useGoTo } from '@/hooks/useGoto';
+import { useGoTo } from '@/hooks/useGoTo';
 import { ROUTE_KEY } from '@/routes/routeConfig';
 
 const Login = () => {
