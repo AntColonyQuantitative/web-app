@@ -17,6 +17,8 @@ const AppContent = () => {
         theme={{
           mode: themeColor,
           direction: 'ltr',
+          shadow: 'on',
+          border: 'on'
         }}
       >
         <GlobalStyles />
