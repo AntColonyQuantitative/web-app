@@ -3,6 +3,7 @@ import ExchangeManagement from '@/containers/ExchangeManagement';
 import Profile from '@/containers/Account/Profile';
 import Page404 from '@/containers/404';
 import Login from '@/containers/Login';
+import Register from '@/containers/Register';
 
 interface IRoute {
   path: string;
@@ -18,7 +19,7 @@ export const ROUTE_KEY = {
   ACCOUNT_PROFILE: 'account_profile',
   PAGE_404: 'page_404',
   LOGIN: 'login',
-  EMPTY: 'empty'
+  REGISTER: 'register'
 };
 
 export const PUBLIC_ROUTE_CONFIG: Record<string, IRoute> = {
@@ -27,6 +28,12 @@ export const PUBLIC_ROUTE_CONFIG: Record<string, IRoute> = {
     name: 'login',
     title: 'Login - AntColony',
     component: Login,
+  },
+  [ROUTE_KEY.REGISTER]: {
+    path: '/register',
+    name: 'register',
+    title: 'Register - AntColony',
+    component: Register,
   },
   [ROUTE_KEY.PAGE_404]:
   {

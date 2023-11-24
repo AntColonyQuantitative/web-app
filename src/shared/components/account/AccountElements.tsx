@@ -191,6 +191,10 @@ export const ForgotFormGroup = styled(FormGroup)`
   margin-bottom: 40px;
 `;
 
+export const LastFormGroup = styled(FormGroup)`
+  margin-bottom: 60px;
+`;
+
 export const AccountHaveAccount = styled.div`
   text-align: center;
   margin-top: 20px;

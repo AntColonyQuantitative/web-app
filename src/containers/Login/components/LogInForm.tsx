@@ -19,6 +19,7 @@ import {
 import { emailPatter } from '@/shared/utils/helpers';
 import { CheckBoxField } from '@/shared/components/form/FormCheckBox';
 import { EMAIL, REMEMBER_ME } from '@/shared/constants/storage';
+import { ROUTE_KEY, getPublicRouteByKey } from '@/routes/routeConfig';
 
 type LogInFormProps = {
   onSubmit: (data: any) => void;
@@ -117,7 +118,7 @@ const LogInForm = ({ onSubmit, error = '' }: LogInFormProps) => {
       <AccountButton
         as={NavLink}
         variant="outline-primary"
-        to="/login"
+        to={getPublicRouteByKey(ROUTE_KEY.REGISTER).path}
       >
         Create Account
       </AccountButton>

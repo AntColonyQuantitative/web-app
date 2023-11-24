@@ -9,3 +9,13 @@ export const USER_LOGIN = gql`
     }
   }
 `;
+
+export const USER_REGISTER = gql`
+  mutation Register($input: CreateUserInput!) {
+    register(input:$input){
+      code
+      message
+      data
+    }
+  }
+`;
