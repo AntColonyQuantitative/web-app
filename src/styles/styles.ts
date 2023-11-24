@@ -6,6 +6,6 @@ export const shadow = theme('shadow', {
 });
 
 export const borderRadius = theme('border', {
-  on: '15px',
-  off: '5px',
+  on: '7px',
+  off: '3px',
 });
