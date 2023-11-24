@@ -24,7 +24,7 @@ import { useSearchParams } from '@/hooks/useSearchParams';
 import { useTitle } from '@/hooks/useTitle';
 import { useUserContext } from '@/hooks/userHooks';
 import { useGoTo } from '@/hooks/useGoTo';
-import { ROUTE_KEY } from '@/routes/routeConfig';
+import { ROUTE_KEY, getPublicRouteByKey } from '@/routes/routeConfig';
 
 const Login = () => {
   const history = useHistory();
@@ -33,7 +33,7 @@ const Login = () => {
   const [login] = useMutation(USER_LOGIN);
   const { store } = useUserContext();
   const { go } = useGoTo();
-  useTitle('Login - AntColony');
+  useTitle(getPublicRouteByKey(ROUTE_KEY.LOGIN).title);
 
   const onSubmit = async (data: {
     email: string;
