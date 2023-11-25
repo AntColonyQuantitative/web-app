@@ -61,7 +61,7 @@ const TopbarProfile = () => {
             <TopbarMenuLink
               title="Settings"
               icon="cog"
-              path="/exchange"
+              path="/account/settings"
               onClick={toggleCollapse}
             />
             <TopbarMenuLink
