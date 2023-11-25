@@ -69,7 +69,7 @@ export const FormGroupIcon = styled.div`
   }
 `;
 
-export const FormContainer = styled.form<{ horizontal?: boolean;  preview?: boolean; justify?: boolean;}>`
+export const FormContainer = styled.form<{ $horizontal?: boolean;  preview?: boolean; justify?: boolean;}>`
   display: flex;
   flex-wrap: wrap;
   text-align: ${left};
@@ -118,7 +118,7 @@ export const FormContainer = styled.form<{ horizontal?: boolean;  preview?: bool
     min-height: 85px;
   }
 
-  ${props => props.horizontal && `
+  ${props => props.$horizontal && `
 
     ${FormGroup} {
       display: flex;

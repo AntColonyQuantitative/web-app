@@ -17,7 +17,7 @@ import {
   LastFormGroup,
 } from '@/shared/components/account/AccountElements';
 import { Controller, useForm } from 'react-hook-form';
-import FormField from './FormField';
+import FormField from '@/shared/components/form/FormHookField';
 
 type RegisterFormProps = {
   onSubmit: (data: any) => void;
@@ -80,7 +80,6 @@ const RegisterForm = ({ onSubmit, error = '' }: RegisterFormProps) => {
           />
         </FormGroupField>
       </FormGroup>
-     
       <FormGroup>
         <FormGroupLabel>Password</FormGroupLabel>
         <FormGroupField>

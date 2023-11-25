@@ -10,7 +10,7 @@ import {
   FormGroupIcon,
   FormGroupLabel,
 } from '@/shared/components/form/FormElements';
-import FormField from './FormField';
+import FormField from '@/shared/components/form/FormHookField';
 import {
   AccountButton,
   AccountForgotPassword,
