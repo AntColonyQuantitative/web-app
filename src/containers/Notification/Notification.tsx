@@ -3,7 +3,7 @@ import { ApolloError } from "@apollo/client";
 import { styled } from "styled-components";
 import { Alert } from "react-bootstrap";
 
-interface NotificationMessage {
+interface NotificationMessageProps {
   children?: React.ReactNode;
   status: StatusProps;
 }
@@ -15,7 +15,7 @@ interface NotificationProps {
 
 type StatusProps = "SUCCESS" | "ERROR";
 
-const NotificationMessage = ({ children, status }: NotificationMessage) => {
+const NotificationMessage = ({ children, status }: NotificationMessageProps) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(true);
 
   React.useEffect(() => {
