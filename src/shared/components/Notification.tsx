@@ -1,133 +1,152 @@
-// import Notification from 'rc-notification';
-import styled from 'styled-components';
+import React from "react";
+import { ApolloError } from "@apollo/client";
+import { styled } from "styled-components";
+import { Alert } from "react-bootstrap";
 import {
-  colorAccent,
   colorBlackBackground,
   colorBlue,
   colorRed,
-  colorWhite,
   colorYellow,
-} from '@/styles/palette';
+} from "@/styles/palette";
 
-const notificationConfig = (theme: any, color:string, rtl: { direction: any; }, title: any, message: any) => {
-  const notificationInitialProps = {
-    content: <BasicNotification
-      color={color}
-      title={title}
-      message={message}
-      theme={theme}
-    />,
-    closable: true,
-    duration: 5,
-    style: { top: 0, left: 'calc(100vw - 100%)' },
-    className: `right-up ${rtl.direction}-support`,
-  };
-  return notificationInitialProps;
-};
-
-type BasicNotificationProps = {
-  theme: any;
-  color?: string;
+interface NotificationMessageProps {
+  children?: React.ReactNode;
+  color: ColorProps;
   title?: string;
-  message: string;
-};
+}
 
-const BasicNotification: React.FC<BasicNotificationProps> = ({
-  color = '', title = '', message, theme,
-}) => (
-  <NotificationContent color={color} theme={theme.className}>
-    <NotificationMessageWrap>
-      <NotificationTitle>{title}</NotificationTitle>
-      <NotificationMessage>{message}</NotificationMessage>
-    </NotificationMessageWrap>
-  </NotificationContent>
-);
+interface NotificationProps {
+  error?: ApolloError;
+  message?: string;
+  color: ColorProps;
+  title?: string;
+  fullWidth?: boolean;
+}
 
-type FullWideNotificationProps = {
-  color?: string;
-  message: string;
-};
+type ColorProps =
+  | "light"
+  | "dark"
+  | "primary"
+  | "success"
+  | "warning"
+  | "danger";
 
-const FullWideNotification: React.FC<FullWideNotificationProps> = ({ color = '', message }) => (
-  <NotificationContent fullWidth color={color}>
-    <NotificationMessage>{message}</NotificationMessage>
-  </NotificationContent>
-);
-
-export {
-  BasicNotification,
-  FullWideNotification,
-  // showNotification,
-  notificationConfig
-};
-
-// region STYLES
-
-const NotificationMessage = styled.p`
-  margin-top: 0;
-  font-size: 12px;
-`;
-
-const NotificationTitle = styled.h5`
-  margin-bottom: 8px;
-  font-weight: 700;
-`;
-
-
-const getColor = (color: string) => {
+const renderColor = (color: ColorProps) => {
   switch (color) {
-    case 'light':
-      return colorWhite;
-    case 'dark':
+    case "dark":
       return colorBlackBackground;
-    case 'primary':
+    case "primary":
       return colorBlue;
-    case 'success':
-      return colorAccent;
-    case 'warning':
+    case "warning":
       return colorYellow;
-    case 'danger':
+    case "danger":
       return colorRed;
-      
     default:
-      return colorWhite;
+      return colorBlackBackground;
   }
 };
 
-const NotificationMessageWrap = styled.div`
-  padding: 20px 40px 20px 25px;
+const renderBackGroundColor = (color: ColorProps) => {
+  return color;
+};
+
+const NotificationMessage = ({
+  children,
+  color,
+  title,
+}: NotificationMessageProps) => {
+  const [isOpen, setIsOpen] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 3000);
+  }, []);
+
+  const handleClick = () => {
+    setIsOpen(false);
+  };
+  return (
+    <Alert
+      variant={renderBackGroundColor(color)}
+      show={!!children && isOpen}
+      onClick={handleClick}
+      style={{ color: renderColor(color) }}
+    >
+      {title && <NotificationTitle color={color}>{title}</NotificationTitle>}
+      {children}
+    </Alert>
+  );
+};
+
+const Notification = ({
+  error,
+  message,
+  color,
+  title,
+  fullWidth,
+}: NotificationProps) => {
+  let defaultErrorMessage = "Something went wrong, please try again";
+
+  return (
+    <Container fullWidth={fullWidth}>
+      {error ? (
+        // Display network error
+        error.networkError ? (
+          <NotificationMessage color={color} title={title}>
+            {error.networkError.message}
+          </NotificationMessage>
+        ) : error.graphQLErrors && error.graphQLErrors.length > 0 ? (
+          error.graphQLErrors.map((graphQLError, i) => {
+            // Display graphQL error
+            // TODO: we may need to add more specifi error types in the future
+            if (graphQLError.originalError?.message) {
+              return (
+                <NotificationMessage key={i} color={color} title={title}>
+                  {graphQLError.originalError.message}
+                </NotificationMessage>
+              );
+            }
+            return null;
+          })
+        ) : (
+          //Display default error message if some unkown graphQL errors occured
+          <NotificationMessage color={color} title={title}>
+            {defaultErrorMessage}
+          </NotificationMessage>
+        )
+      ) : (
+        //Display success message
+        message && (
+          <NotificationMessage color={color} title={title}>
+            {message}
+          </NotificationMessage>
+        )
+      )}
+    </Container>
+  );
+};
+
+export default Notification;
+
+const Container = styled.div<{ fullWidth?: boolean }>`
+  max-width: 480px;
+  position: fixed;
+  top: 10;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  z-index: 1030;
+  cursor: pointer;
+  ${(props) =>
+    props.fullWidth &&
+    `
+  max-width: 100vw;
+  `}
 `;
 
-const NotificationContent = styled.div<{
-  fullWidth?: boolean;
-  theme: string;
-  color: string;
-}>`
-  max-width: 400px;
-  width: calc(100% - 50px);
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.07);
-  background: ${props => getColor(props.color || props.theme)};
-  position: relative;
-  margin: 10px 25px;
-  display: flex;
-
-  ${props => props.fullWidth && `
-    max-width: 100vw;
-    width: 100vw;
-    margin: 0;
-    padding: 20px 40px 20px 25px;
-
-    ${NotificationMessage} {
-      text-align: center;
-      width: calc(100% - 30px);
-    }
-  `}
-
-  ${props => (props.color || props.theme === 'dark') && `
-    ${NotificationMessage}, ${NotificationTitle} {
-      color: ${colorWhite};
-    }
-  `}
+const NotificationTitle = styled.h5<{ color: ColorProps }>`
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: ${({ color }) => renderColor(color)};
 `;
-
-// endregion
