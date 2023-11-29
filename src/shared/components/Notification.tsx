@@ -1,13 +1,14 @@
-import React from "react";
-import { ApolloError } from "@apollo/client";
-import { styled } from "styled-components";
-import { Alert } from "react-bootstrap";
+import React from 'react';
+import { ApolloError } from '@apollo/client';
+import { styled } from 'styled-components';
+import { Alert } from 'react-bootstrap';
 import {
   colorBlackBackground,
   colorBlue,
   colorRed,
+  colorWhite,
   colorYellow,
-} from "@/styles/palette";
+} from '@/styles/palette';
 
 interface NotificationMessageProps {
   children?: React.ReactNode;
@@ -24,30 +25,26 @@ interface NotificationProps {
 }
 
 type ColorProps =
-  | "light"
-  | "dark"
-  | "primary"
-  | "success"
-  | "warning"
-  | "danger";
+  | 'light'
+  | 'dark'
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'danger';
 
 const renderColor = (color: ColorProps) => {
   switch (color) {
-    case "dark":
+    case 'dark':
       return colorBlackBackground;
-    case "primary":
+    case 'primary':
       return colorBlue;
-    case "warning":
+    case 'warning':
       return colorYellow;
-    case "danger":
+    case 'danger':
       return colorRed;
     default:
       return colorBlackBackground;
   }
-};
-
-const renderBackGroundColor = (color: ColorProps) => {
-  return color;
 };
 
 const NotificationMessage = ({
@@ -68,12 +65,12 @@ const NotificationMessage = ({
   };
   return (
     <Alert
-      variant={renderBackGroundColor(color)}
+      variant={color}
       show={!!children && isOpen}
       onClick={handleClick}
-      style={{ color: renderColor(color) }}
+      style={{ color: colorWhite, background: renderColor(color) }}
     >
-      {title && <NotificationTitle color={color}>{title}</NotificationTitle>}
+      {title && <NotificationTitle>{title}</NotificationTitle>}
       {children}
     </Alert>
   );
@@ -86,7 +83,7 @@ const Notification = ({
   title,
   fullWidth,
 }: NotificationProps) => {
-  let defaultErrorMessage = "Something went wrong, please try again";
+  let defaultErrorMessage = 'Something went wrong, please try again';
 
   return (
     <Container fullWidth={fullWidth}>
@@ -145,8 +142,8 @@ const Container = styled.div<{ fullWidth?: boolean }>`
   `}
 `;
 
-const NotificationTitle = styled.h5<{ color: ColorProps }>`
+const NotificationTitle = styled.h5`
   margin-bottom: 8px;
   font-weight: 700;
-  color: ${({ color }) => renderColor(color)};
+  color: ${colorWhite};
 `;
