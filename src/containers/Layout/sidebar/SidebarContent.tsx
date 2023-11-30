@@ -35,35 +35,35 @@ const SidebarContent = ({ onClick, $collapse }: SidebarContentProps) => {
     <SidebarContentWrap $collapse={$collapse}>
       <SidebarBlock $collapse={$collapse}>
         <SidebarLink
-          title="Dashboard"
+          title={getRouteByKey(ROUTE_KEY.DASHBOARD).name}
           icon="home"
-          route="/dashboard"
+          route={getRouteByKey(ROUTE_KEY.DASHBOARD).path}
           onClick={onClick}
         />
       </SidebarBlock>
       <SidebarBlock $collapse={$collapse}>
         <SidebarCategory
-          title="Auto Invest Plan"
+          title="Auto Invest"
           icon="chart-bars"
           $collapse={$collapse}
         >
           <SidebarLink
-            title="AIP Dashboard"
+            title={getRouteByKey(ROUTE_KEY.AIP_DASHBOARD).name}
             route={getRouteByKey(ROUTE_KEY.AIP_DASHBOARD).path}
             onClick={() => {}}
           />
           <SidebarLink
-            title="AIP Management"
+            title={getRouteByKey(ROUTE_KEY.AIP_MANAGEMENT).name}
             route={getRouteByKey(ROUTE_KEY.AIP_MANAGEMENT).path}
             onClick={() => {}}
           />
           <SidebarLink
-            title="Create AIP"
+            title={getRouteByKey(ROUTE_KEY.AIP_CREATE).name}
             route={getRouteByKey(ROUTE_KEY.AIP_CREATE).path}
             onClick={() => {}}
           />
           <SidebarLink
-            title="AIP Details"
+            title={getRouteByKey(ROUTE_KEY.AIP_DETAILS).name}
             route={getRouteByKey(ROUTE_KEY.AIP_DETAILS).path}
             onClick={() => {}}
           />
@@ -74,32 +74,32 @@ const SidebarContent = ({ onClick, $collapse }: SidebarContentProps) => {
           $collapse={$collapse}
         >
           <SidebarLink
-            title="Crypto Prices"
+            title={getRouteByKey(ROUTE_KEY.CRYPTO_PRICES).name}
             route={getRouteByKey(ROUTE_KEY.CRYPTO_PRICES).path}
             onClick={() => {}}
           />
           <SidebarLink
-            title="Crypto Price Details"
+            title={getRouteByKey(ROUTE_KEY.CRYPTO_PRICE_DETAILS).name}
             route={getRouteByKey(ROUTE_KEY.CRYPTO_PRICE_DETAILS).path}
             onClick={() => {}}
           />
           <SidebarLink
-            title="Crypto Exchanges"
+            title={getRouteByKey(ROUTE_KEY.CRYPTO_EXCHANGES).name}
             route={getRouteByKey(ROUTE_KEY.CRYPTO_EXCHANGES).path}
             onClick={() => {}}
           />
           <SidebarLink
-            title="Exchange Details"
+            title={getRouteByKey(ROUTE_KEY.CRYPTO_EXCHANGE_DETAILS).name}
             route={getRouteByKey(ROUTE_KEY.CRYPTO_EXCHANGE_DETAILS).path}
             onClick={() => {}}
           />
           <SidebarLink
-            title="Market News"
+            title={getRouteByKey(ROUTE_KEY.CRYPTO_NEWS).name}
             route={getRouteByKey(ROUTE_KEY.CRYPTO_NEWS).path}
             onClick={() => {}}
           />
           <SidebarLink
-            title="News Detail"
+            title={getRouteByKey(ROUTE_KEY.CRYPTO_NEWS_DETAIL).name}
             route={getRouteByKey(ROUTE_KEY.CRYPTO_NEWS_DETAIL).path}
             onClick={() => {}}
           />
@@ -126,13 +126,13 @@ const SidebarContent = ({ onClick, $collapse }: SidebarContentProps) => {
         </SidebarCategory>
         <SidebarCategory title="Account" icon="user" $collapse={$collapse}>
           <SidebarLink
-            title="Profile"
-            route="/account/profile"
+            title={getRouteByKey(ROUTE_KEY.ACCOUNT_PROFILE).name}
+            route={getRouteByKey(ROUTE_KEY.ACCOUNT_PROFILE).path}
             onClick={onClick}
           />
           <SidebarLink
-            title="Exchange Management"
-            route="/exchange"
+            title={getRouteByKey(ROUTE_KEY.EXCHANGE_MANAGEMENT).name}
+            route={getRouteByKey(ROUTE_KEY.EXCHANGE_MANAGEMENT).path}
             onClick={onClick}
           />
         </SidebarCategory>
